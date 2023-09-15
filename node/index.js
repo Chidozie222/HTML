@@ -1,6 +1,10 @@
 const express = require('express')
 const {google} = require('googleapis');
 const Valuemize = require('./valuemize.json');
+const cors = require('cors')
+
+
+app.use(cors())
 
 
 
