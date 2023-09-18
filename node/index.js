@@ -47,7 +47,7 @@ app.get('/NG', async(req, res) =>{
 
 
     let data = await gapi.spreadsheets.values.get(opt);
-    console.log(data.data.values);
+    console.log(data.data.values[0]);
     res.send(data.data.values);
 
 })
