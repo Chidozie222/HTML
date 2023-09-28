@@ -1,11 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+</head>
+
+<style>
+      #drop button{
+        display: block;
+        align-items: center;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: blue;
+        font-size: larger;
+        font-weight: 600;
+        padding: 12px 0 12px 0;
+        color: white;
+        margin: 12px 0 12px 0;
+    }
+    li{
+        text-decoration: none;
+        list-style: none;
+    }
+    ul{
+        padding: 0;
+    }
+    ul li{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    .btn{
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+    }
+    .container-fluid{
+       background-color: #0274be; 
+    }
+    #Title{
+        color: white;
+    }
+    #hidden{
+        text-overflow: ellipsis;
+         overflow-x: hidden;  
+        max-width: 200px;
+    }
 
 
 
-22592689866-gvfd7l0ltr1dq4f6icacnis59ctfgm9c.apps.googleusercontent.com
+    @media screen and (min-width: 700px){
+        .table{
+            width: 390px;
+        }
+        td, tr {
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible;   /* Show overflowing text */
+    text-overflow: clip; /* No ellipsis for overflow text */
+  }
+
+    }
+
+    .hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+</style>
+<body>
+
+    <div class="container">
 
 
 
-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
+<ul>
+        <li id="Back">
+            <button onclick="hide()" class="btn btn-outline-primary" id="hello">Select a country</button>
+            <button onclick="Drop()" class="btn btn-outline-primary" id="world">Select a country</button>
+            <div id="drop">
+                <button onclick="Ng()">Nigeria</button>
+                <button onclick="MW()">Malawi</button>
+                <button onclick="UG()">Uganda</button>
+                <button onclick="ZW()">Zimbabwe</button>
+                <button onclick="IC()">Ivory Coast</button>
+                <button onclick="TZ()">Tanzania</button>
+                <button onclick="api()">Egypt</button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+    <!--Uganda
+    Zimbabwe
+Ivory Coast
+Tanzania
+Egypt
+Malawi-->
+
+<div class="container">
+    <div class="container-fluid p-2 text-white text-center">
+        <h1 id="Title"></h1>
+      </div>
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr class="table-dark">
+                    <th>Title</th>
+                    <th>Date<br/> Published</th>
+                    <th></th>
+            </tr>
+        </thead>
+        <tbody id="Body">
+
+        </tbody>
+        </table>
+    </div>
+
+    
 
 
-AIzaSyBvvGzPlsSm8hA8Wx5mLxawCY7MPNqzztE
+    <script>
+
+        var state = {
+            'page': 1,
+            'rows': 5, 
+        }
+
+        window.onload = hide();
+        window.onload = Ng()
+
+                function hide(){
+    document.getElementById('drop').style.display = 'none';
+    document.getElementById('hello').style.display = 'none';
+    document.getElementById('world').style.display = 'block';
+}
+
+function Drop(){
+    document.getElementById('drop').style.display = 'block';
+    document.getElementById('hello').style.display = 'block';
+    document.getElementById('world').style.display = 'none';
+    }
+
+        function api(data) {
+
+            const url = "https://sba-fkqb.onrender.com/EG"
+            fetch(url,{method: 'GET'})
+                .then((res) =>res.json())
+                .then((data) => {
+                    console.log(data);
+                    let table = "";
+                    data.map((items)=>{
+                        table +=`<tr>
+                                <td id="hidden">${items[0]}</td>
+                                <td>${items[1]}</td>
+                                <td>${items[2]}</td>
+                            <tr>`
+                    });
+                    document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Egypt'
+                })
+        }
+
+        function Ng(data) {
+
+            const url = "https://sba-fkqb.onrender.com/NG"
+            fetch(url,{method: 'GET'})
+                .then((res) =>res.json())
+                .then((data) => {
+                    console.log(data);
+                    let table = "";
+                    data.map((items)=>{
+                        table +=`<tr>
+                                <td id="hidden">${items[0]}</td>
+                                <td>${items[1]}</td>
+                                <td>${items[2]}</td>
+                            <tr>` 
+                                
+                    });
+                    document.getElementById("Body").innerHTML=table;
+                    document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Nigeria';
+                    
+         })
+        }
+
+         function MW(data) {
+
+            const url = "https://sba-fkqb.onrender.com/MW"
+            fetch(url,{method: 'GET'})
+                .then((res) =>res.json())
+                .then((data) => {
+                    console.log(data);
+                    let table = "";
+                    data.map((items)=>{
+                        table +=`<tr>
+                                <td id="hidden">${items[0]}</td>
+                                <td>${items[1]}</td>
+                                <td>${items[2]}</td>
+                            <tr>`
+                    });
+                    document.getElementById("Body").innerHTML=table;
+                    document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Malawi'
+             })
+        }
+        function UG(data) {
+
+const url = "https://sba-fkqb.onrender.com/Ug"
+fetch(url,{method: 'GET'})
+    .then((res) =>res.json())
+    .then((data) => {
+        console.log(data);
+        let table = "";
+        data.map((items)=>{
+            table +=`<tr>
+                    <td id="hidden">${items[0]}</td>
+                    <td>${items[1]}</td>
+                    <td>${items[2]}</td>
+                <tr>`
+        });
+        document.getElementById("Body").innerHTML=table;
+        document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Uganda'
+ })
+}
+function ZW(data) {
+
+const url = "https://sba-fkqb.onrender.com/ZW"
+fetch(url,{method: 'GET'})
+    .then((res) =>res.json())
+    .then((data) => {
+        console.log(data);
+        let table = "";
+        data.map((items)=>{
+            table +=`<tr>
+                    <td id="hidden">${items[0]}</td>
+                    <td>${items[1]}</td>
+                    <td>${items[2]}</td>
+                <tr>`
+        });
+        document.getElementById("Body").innerHTML=table;
+        document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Zimbabwe'
+ })
+}
+function IC(data) {
+
+const url = "https://sba-fkqb.onrender.com/IC"
+fetch(url,{method: 'GET'})
+    .then((res) =>res.json())
+    .then((data) => {
+        console.log(data);
+        let table = "";
+        data.map((items)=>{
+            table +=`<tr>
+                    <td id="hidden">${items[0]}</td>
+                    <td>${items[1]}</td>
+                    <td>${items[2]}</td>
+                <tr>`
+        });
+        document.getElementById("Body").innerHTML=table;
+        document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Ivory Coast'
+ })
+}
+function TZ(data) {
+
+const url = "https://sba-fkqb.onrender.com/TZ"
+fetch(url,{method: 'GET'})
+    .then((res) =>res.json())
+    .then((data) => {
+        console.log(data);
+        let table = "";
+        data.map((items)=>{
+            table +=`<tr>
+                    <td id="hidden">${items[0]}</td>
+                    <td>${items[1]}</td>
+                    <td>${items[2]}</td>
+                <tr>`
+        });
+        document.getElementById("Body").innerHTML=table;
+        document.getElementById('drop').style.display = 'none';
+                    document.getElementById('Title').innerHTML='Tanzania'
+ })
+}
+    </script>
+</body>
+</html>
